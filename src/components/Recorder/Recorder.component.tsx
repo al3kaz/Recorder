@@ -2,14 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { startAction, stopAction } from '../../Redux/recorder/recorder.actions';
 import { selectDateStart } from '../../Redux/recorder/recorder.selectors';
+import { createUserEvent } from '../../Redux/user/user.actions';
 import cx from 'classnames/bind';
 import './Recorder.styles.css';
+import { addZero } from '../../lib/utils';
 
-const addZero = (num: number) => (num < 10 ? `0${num}` : `${num}`);
-
-export interface RecorderProps {}
-
-const Recorder: React.FC<RecorderProps> = () => {
+const Recorder: React.FC = () => {
   const [count, setCount] = useState<number>(0);
   const dispatch = useDispatch();
   const dateStart = useSelector(selectDateStart);
@@ -19,6 +17,7 @@ const Recorder: React.FC<RecorderProps> = () => {
   const handleClick = () => {
     if (started) {
       window.clearInterval(interval.current);
+      dispatch(createUserEvent());
       dispatch(stopAction());
     } else {
       dispatch(startAction());

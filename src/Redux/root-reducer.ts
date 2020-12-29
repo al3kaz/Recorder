@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import recorderReducer from './recorder/recorder-reducer';
-import userEventsReducer from './user/user-reducer';
+import recorderReducer from './recorder/recorder.reducer';
+import userEventsReducer from './user/user.reducer';
 
 const rootReducer = combineReducers({
   userEvents: userEventsReducer,
