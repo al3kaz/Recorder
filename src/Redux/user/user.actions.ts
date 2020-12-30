@@ -11,9 +11,13 @@ import {
   DELETE_REQUEST,
   DELETE_SUCCESS,
   DELETE_FAILURE,
+  UPDATE_REQUEST,
+  UPDATE_SUCCESS,
+  UPDATE_FAILURE,
 } from './user.types';
 import { UserEvents } from './user.reducer';
 import { selectDateStart } from '../recorder/recorder.selectors';
+import { title } from 'process';
 
 export interface LoadRequestAction extends Action<typeof LOAD_REQUEST> {}
 export interface LoadSuccessAction extends Action<typeof LOAD_SUCCESS> {
@@ -132,6 +136,46 @@ export const deleteUserEvent = (
   } catch (error) {
     dispatch({
       type: DELETE_FAILURE,
+    });
+  }
+};
+
+export interface UpdateRequestAction extends Action<typeof UPDATE_REQUEST> {}
+export interface UpdateSuccessAction extends Action<typeof UPDATE_SUCCESS> {
+  payload: {
+    event: UserEvents;
+  };
+}
+export interface UpdateFailureAction extends Action<typeof UPDATE_FAILURE> {}
+
+export const updateEventAction = (
+  event: UserEvents
+): ThunkAction<
+  Promise<void>,
+  RootState,
+  undefined,
+  UpdateRequestAction | UpdateSuccessAction | UpdateFailureAction
+> => async (dispatch) => {
+  dispatch({
+    type: UPDATE_REQUEST,
+  });
+
+  try {
+    const response = await fetch(`http://localhost:3001/events/${event.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(event),
+    });
+    const updatedEvent: UserEvents = await response.json();
+    dispatch({
+      type: UPDATE_SUCCESS,
+      payload: { event: updatedEvent },
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_FAILURE,
     });
   }
 };

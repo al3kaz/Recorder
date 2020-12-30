@@ -9,3 +9,7 @@ export const CREATE_FAILURE = 'userEvents/create_failure';
 export const DELETE_REQUEST = 'userEvents/delete_request';
 export const DELETE_SUCCESS = 'userEvents/delete_success';
 export const DELETE_FAILURE = 'userEvents/delete_failure';
+
+export const UPDATE_REQUEST = 'userEvents/update_request';
+export const UPDATE_SUCCESS = 'userEvents/update_success';
+export const UPDATE_FAILURE = 'userEvents/update_failure';

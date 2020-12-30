@@ -2,18 +2,12 @@
   "events": [
     {
       "id": 1,
-      "title": "jogging",
+      "title": "joggingasdasd",
       "dateStart": "2020-12-26T11:42:49.679Z",
       "dateEnd": "2020-12-27T13:42:49.679Z"
     },
     {
-      "title": "no name",
-      "dateStart": "2020-12-29T21:38:07.308Z",
-      "dateEnd": "2020-12-29T21:38:08.006Z",
-      "id": 2
-    },
-    {
-      "title": "no name",
+      "title": "Ale jazda",
       "dateStart": "2020-12-29T21:38:09.036Z",
       "dateEnd": "2020-12-29T21:38:09.853Z",
       "id": 3

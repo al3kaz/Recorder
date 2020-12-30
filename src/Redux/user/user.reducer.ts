@@ -2,8 +2,14 @@ import {
   CreateSuccessAction,
   DeleteSuccessAction,
   LoadSuccessAction,
+  UpdateSuccessAction,
 } from './user.actions';
-import { CREATE_SUCCESS, DELETE_SUCCESS, LOAD_SUCCESS } from './user.types';
+import {
+  CREATE_SUCCESS,
+  DELETE_SUCCESS,
+  LOAD_SUCCESS,
+  UPDATE_SUCCESS,
+} from './user.types';
 
 export interface UserEvents {
   id: number;
@@ -24,7 +30,11 @@ const INITIAL_STATE: UserEventsState = {
 
 const userEventsReducer = (
   state: UserEventsState = INITIAL_STATE,
-  action: LoadSuccessAction | CreateSuccessAction | DeleteSuccessAction
+  action:
+    | LoadSuccessAction
+    | CreateSuccessAction
+    | DeleteSuccessAction
+    | UpdateSuccessAction
 ) => {
   switch (action.type) {
     case LOAD_SUCCESS:
@@ -55,6 +65,13 @@ const userEventsReducer = (
       };
       delete newState.byIds[id];
       return newState;
+
+    case UPDATE_SUCCESS:
+      const { event: updatedEvent } = action.payload;
+      return {
+        ...state,
+        byIds: { ...state.byIds, [updatedEvent.id]: updatedEvent },
+      };
 
     default:
       return state;
